@@ -33,8 +33,8 @@ export const store = mutation({
     return await ctx.db.insert("users", {
       name: identity.name ?? "Anonymous",
       tokenIdentifier: identity.tokenIdentifier,
-      email:identity.email,
-      ImageUrl:identity.pictureUrl,
+      email: identity.email,
+      ImageUrl: identity.pictureUrl,
     });
   },
 });
@@ -85,10 +85,9 @@ export const searchUsers = query({
     // Combine results (removing duplicates)
     const users = [
       ...nameResults,
-      ...emailResults.filter(
-        (email) => !nameResults.some((name) => name._id === email._id)
-      ),
+      ...emailResults.filter((email) => !nameResults.some((name) => name._id === email._id)),
     ];
+
     // Exclude current user and format results
     return users
       .filter((user) => user._id !== currentUser._id)
@@ -96,7 +95,7 @@ export const searchUsers = query({
         id: user._id,
         name: user.name,
         email: user.email,
-        imageUrl: user.imageUrl,
+        imageUrl: user.ImageUrl,
       }));
   },
 });

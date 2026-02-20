@@ -24,26 +24,43 @@ export const createExpense = mutation({
     // Use centralized getCurrentUser function
     const user = await ctx.runQuery(internal.users.getCurrentUser);
 
-    // If there's a group, verify the user is a member
+    // If there's a group, verify the user is a member and all splits are valid group members
+    let validParticipantIds = [user._id];
     if (args.groupId) {
       const group = await ctx.db.get(args.groupId);
       if (!group) {
         throw new Error("Group not found");
       }
-
-      const isMember = group.members.some(
-        (member) => member.userId === user._id
-      );
+      const isMember = group.members.some((member) => member.userId === user._id);
       if (!isMember) {
         throw new Error("You are not a member of this group");
+      }
+      validParticipantIds = group.members.map((m) => m.userId);
+    } else {
+      // For non-group, valid participants are those in splits (including caller)
+      validParticipantIds = Array.from(new Set(args.splits.map((s) => s.userId).concat([user._id, args.paidByUserId])));
+    }
+
+    // Ensure the caller is a participant in the expense
+    const callerInSplits = args.splits.some((s) => s.userId === user._id);
+    if (!callerInSplits) {
+      throw new Error("You must be a participant in the expense");
+    }
+
+    // Ensure paidByUserId is a valid participant
+    if (!validParticipantIds.includes(args.paidByUserId)) {
+      throw new Error("Payer must be a valid participant");
+    }
+
+    // Ensure all splits are valid participants
+    for (const split of args.splits) {
+      if (!validParticipantIds.includes(split.userId)) {
+        throw new Error("All splits must be valid participants");
       }
     }
 
     // Verify that splits add up to the total amount (with small tolerance for floating point issues)
-    const totalSplitAmount = args.splits.reduce(
-      (sum, split) => sum + split.amount,
-      0
-    );
+    const totalSplitAmount = args.splits.reduce((sum, split) => sum + split.amount, 0);
     const tolerance = 0.01; // Allow for small rounding errors
     if (Math.abs(totalSplitAmount - args.amount) > tolerance) {
       throw new Error("Split amounts must add up to the total expense amount");
@@ -145,8 +162,8 @@ export const getExpensesBetweenUsers = query({
 
     for (const s of settlements) {
       if (s.paidByUserId === me._id)
-        balance += s.amount; // I paid them back
-      else balance -= s.amount; // they paid me back
+        balance -= s.amount; // I paid them back (I owe less)
+      else balance += s.amount; // they paid me back (they owe less)
     }
 
     /* ───── 5. Return payload ───────────────────────────────────────── */

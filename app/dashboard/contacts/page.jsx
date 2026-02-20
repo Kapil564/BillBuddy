@@ -93,7 +93,7 @@ export default function ContactsPage() {
               <Users className="mr-2 h-5 w-5" />
               Groups
             </h2>
-             {users.length === 0?(
+             {groups.length === 0?(
               <Card>
               <CardContent className="py-6 text-center text-muted-foreground">
                 No groups yet. Add a groups to see them here.

@@ -1,0 +1,33 @@
+/* ============================================
+   PATTERNS & GRADIENTS
+   ============================================ */
+@utility gradient-text {
+  background: linear-gradient(130deg, #0f766e 0%, #0369a1 55%, #0ea5e9 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@utility surface-gradient {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+}
+
+@utility mesh-gradient {
+  background:
+    radial-gradient(at 20% 20%, rgba(15, 118, 110, 0.12), transparent 45%),
+    radial-gradient(at 80% 15%, rgba(3, 105, 161, 0.12), transparent 45%),
+    radial-gradient(at 70% 80%, rgba(56, 189, 248, 0.09), transparent 50%);
+}
+
+@utility dot-pattern {
+  background-image: radial-gradient(rgba(100, 116, 139, 0.2) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@utility grid-pattern {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-size: 36px 36px;
+}

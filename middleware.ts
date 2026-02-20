@@ -1,6 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+
 const isProtectedRoute = createRouteMatcher([
   "/dashboard(.*)",
   "/expenses(.*)",
@@ -8,6 +9,7 @@ const isProtectedRoute = createRouteMatcher([
   "/groups(.*)",
   "/person(.*)",
   "/settlements(.*)",
+  "/api/email(.*)", // Protect email relay endpoint
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
@@ -17,6 +19,7 @@ export default clerkMiddleware(async (auth, req) => {
     const { redirectToSignIn } = await auth();
     return redirectToSignIn();
   }
+  return;
 
   return NextResponse.next();
 });

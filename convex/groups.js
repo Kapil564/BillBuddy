@@ -31,12 +31,11 @@ export const getGroupOrMembers = query({
         selectedGroup.members.map(async (member) => {
           const user = await ctx.db.get(member.userId);
           if (!user) return null;
-
           return {
             id: user._id,
             name: user.name,
             email: user.email,
-            imageUrl: user.imageUrl,
+            imageUrl: user.ImageUrl,
             role: member.role,
           };
         })
@@ -136,8 +135,8 @@ export const getGroupExpenses = query({
 
     /* ----------  apply settlements ---------- */
     for (const s of settlements) {
-      totals[s.paidByUserId] += s.amount;
-      totals[s.receivedByUserId] -= s.amount;
+      totals[s.paidByUserId] -= s.amount; // payer: total goes down
+      totals[s.receivedByUserId] += s.amount; // receiver: total goes up
 
       ledger[s.paidByUserId][s.receivedByUserId] -= s.amount; // they paid back
     }

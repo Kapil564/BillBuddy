@@ -1,142 +1,86 @@
-"use client";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { useStoreUser } from "@/hooks/use-store-user";
-import { SignInButton ,UserButton, SignUpButton } from "@clerk/nextjs";
+﻿"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { LayoutDashboardIcon } from "lucide-react";
+import { Menu, X, LayoutDashboardIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { Authenticated, Unauthenticated } from "convex/react";
+import { useStoreUser } from "@/hooks/use-store-user";
+
+const navItems = [
+  { label: "Features", href: "#features" },
+  { label: "How it works", href: "#workflow" },
+  { label: "FAQ", href: "#faq" },
+  { label: "About", href: "#about" },
+];
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  useStoreUser();
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
-    }
-  };
-  const { isLoading } = useStoreUser();
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass-effect-strong border-b border-primary/20">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <button
-              onClick={() => scrollToSection("home")}
-              className="text-2xl font-bold text-foreground"
-            >
-              BillBuddy
-            </button>
-          </div>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all ${isScrolled ? "bg-background/85 backdrop-blur-xl border-b border-border" : "bg-transparent"}`}>
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="#home" className="flex items-center gap-2 text-foreground">
+          <span className="h-7 w-7 rounded-md bg-primary/15 border border-primary/40 text-primary grid place-items-center font-mono text-sm">?</span>
+          <span className="font-serif text-lg">Bill Buddy</span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={() => scrollToSection("home")}
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => scrollToSection("about")}
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              About Us
-            </button>
-            <button
-              onClick={() => scrollToSection("features")}
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Features
-            </button>
-          </div>
-
-          {/* Desktop Action Buttons */}
-          <div className="hidden md:flex items-center space-x-2">
-            <Authenticated>
-              <Link href={"/dashboard"}>
-                <Button className="font-bold px-3 py-2 rounded-3xl bg-primary hover:bg-primary-dark text-primary-foreground hover:scale-105 transition-all">
-                  <LayoutDashboardIcon className="mr-2 h-4 w-4" />
-                  <span className="hidden md:inline cursor-pointer">
-                    Dashboard
-                  </span>
-                </Button>
-              </Link>
-             <UserButton appearance={{
-                  elements: {
-                    userButtonAvatarBox: {
-                      width: "2.4rem",
-                      height: "2.4rem",
-                    },
-                  },
-                }} />
-            </Authenticated>
-
-            <Unauthenticated>
-              <SignInButton>
-                <button className="font-bold px-3 py-2 rounded-3xl hover:bg-muted/50 transition-all">
-                  Log In
-                </button>
-              </SignInButton>
-              <SignUpButton>
-                <button className="font-bold px-3 py-2 rounded-3xl bg-primary hover:bg-primary-dark text-primary-foreground hover:scale-105 transition-all">
-                  Get Started for Free
-                </button>
-              </SignUpButton>
-            </Unauthenticated>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </Button>
-          </div>
+        <div className="hidden md:flex items-center gap-8">
+          {navItems.map((item) => (
+            <a key={item.label} href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              {item.label}
+            </a>
+          ))}
         </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 space-y-4">
-            <button
-              onClick={() => scrollToSection("home")}
-              className="block w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded-lg transition-colors font-medium"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => scrollToSection("about")}
-              className="block w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded-lg transition-colors font-medium"
-            >
-              About Us
-            </button>
-            <button
-              onClick={() => scrollToSection("features")}
-              className="block w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded-lg transition-colors font-medium"
-            >
-              Features
-            </button>
-            <div className="flex flex-col space-y-2 px-4 pt-4 border-t border-border">
-              <SignInButton>
-                <button className="w-full font-bold px-3 py-2 rounded-lg hover:bg-muted/50 transition-all">
-                  Log In
-                </button>
-              </SignInButton>
-              <SignUpButton>
-                <button className="w-full font-bold px-3 py-2 rounded-lg bg-primary hover:bg-primary-dark text-primary-foreground transition-all">
-                  Get Started for Free
-                </button>
-              </SignUpButton>
-            </div>
-          </div>
-        )}
+        <div className="hidden md:flex items-center gap-2">
+          <Authenticated>
+            <Link href="/dashboard">
+              <Button className="bg-primary text-background hover:bg-primary-dark">
+                <LayoutDashboardIcon className="mr-2 h-4 w-4" />
+                Dashboard
+              </Button>
+            </Link>
+            <UserButton appearance={{ elements: { userButtonAvatarBox: { width: "2.2rem", height: "2.2rem" } } }} />
+          </Authenticated>
+
+          <Unauthenticated>
+            <SignInButton>
+              <button className="px-3 py-2 rounded-md text-sm text-muted-foreground border border-border hover:text-foreground">Sign in</button>
+            </SignInButton>
+            <SignUpButton>
+              <button className="px-3.5 py-2 rounded-md text-sm font-medium bg-primary text-background hover:bg-primary-dark">
+                Get started free
+              </button>
+            </SignUpButton>
+          </Unauthenticated>
+        </div>
+
+        <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen((v) => !v)}>
+          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </Button>
       </nav>
+
+      {isMenuOpen && (
+        <div className="md:hidden border-t border-border bg-background/95 px-4 py-4 space-y-3">
+          {navItems.map((item) => (
+            <a key={item.label} href={item.href} onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 rounded-md text-sm text-foreground hover:bg-white/5">
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
     </header>
   );
 }
+
