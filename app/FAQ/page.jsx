@@ -4,24 +4,24 @@ import { useState } from "react";
 
 const faqs = [
   {
-    q: "Do all my friends need to sign up?",
-    a: "Yes, each member should have an account so expenses, balances, and settlements stay accurate for everyone.",
+    q: "Do friends need to sign up?",
+    a: "Yes, each member needs an account so all balances and settlements remain accurate for everyone.",
   },
   {
-    q: "Can we settle with UPI apps?",
-    a: "You can settle externally using your preferred UPI app and then record it in BillBuddy for clean tracking.",
+    q: "Which UPI apps are supported?",
+    a: "You can settle with any preferred UPI app and then record that settlement in Bill Buddy.",
   },
   {
-    q: "Can I export expense records?",
-    a: "Yes, your expense history remains structured so you can review and export details whenever needed.",
+    q: "Can I export expense history?",
+    a: "Yes, your history remains structured for review and export workflows.",
   },
   {
-    q: "Is BillBuddy free to use?",
-    a: "Core expense splitting and settlement tracking are available to all users.",
+    q: "Is Bill Buddy free?",
+    a: "Core splitting and settlement capabilities are available on the free plan.",
   },
   {
     q: "Is there a mobile app?",
-    a: "BillBuddy is fully responsive on mobile web, with ongoing improvements for app-like usage.",
+    a: "Bill Buddy is mobile responsive today, with ongoing improvements for app-like use.",
   },
 ];
 
@@ -29,35 +29,26 @@ export default function FAQ() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="py-20">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">FAQ</p>
-          <h2 className="heading-lg mt-4">Everything you need to know</h2>
-        </div>
+    <section id="faq" className="max-w-[800px] mx-auto px-5 sm:px-8 py-[100px]">
+      <p className="font-mono text-[10px] tracking-[3px] uppercase text-accent text-center">FAQ</p>
+      <h2 className="heading-lg text-center mt-4">Questions, answered</h2>
 
-        <div className="space-y-3">
-          {faqs.map((item, idx) => {
-            const isOpen = idx === open;
-            return (
-              <div key={item.q} className="rounded-xl border border-border bg-card overflow-hidden">
-                <button
-                  type="button"
-                  className="w-full px-5 py-4 text-left flex items-center justify-between"
-                  onClick={() => setOpen(isOpen ? -1 : idx)}
-                >
-                  <span className="font-medium text-foreground">{item.q}</span>
-                  <span className={`text-primary transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>+</span>
-                </button>
-                <div className={`px-5 transition-all duration-300 overflow-hidden ${isOpen ? "max-h-40 pb-4" : "max-h-0"}`}>
-                  <p className="body-md text-muted-foreground">{item.a}</p>
-                </div>
+      <div className="mt-10">
+        {faqs.map((item, idx) => {
+          const isOpen = open === idx;
+          return (
+            <div key={item.q} className="border-b border-border">
+              <button className="w-full py-5 text-left flex items-center justify-between hover:text-accent transition-colors" onClick={() => setOpen(isOpen ? -1 : idx)}>
+                <span className="font-sans text-[15px]">{item.q}</span>
+                <span className={`text-accent transition-transform ${isOpen ? "rotate-45" : ""}`}>+</span>
+              </button>
+              <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[200px] pb-5" : "max-h-0"}`}>
+                <p className="font-sans text-[14px] text-muted-foreground leading-[1.7]">{item.a}</p>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
 }
-
