@@ -26,7 +26,7 @@ export default function Features() {
         Powerful features from the original Bill Buddy experience, now presented in a cleaner editorial layout.
       </p>
 
-      <div className="mt-10 rounded-2xl overflow-hidden bg-border grid md:grid-cols-2 lg:grid-cols-3 gap-[2px]">
+      <div className="mt-10 rounded-2xl cursor-pointer overflow-hidden bg-border grid md:grid-cols-2 lg:grid-cols-3 gap-[2px]">
         {features.map((feature) => {
           const Icon = feature.icon;
           return (
@@ -35,7 +35,7 @@ export default function Features() {
               <div className={`h-12 w-12 rounded-[14px] border grid place-items-center ${toneMap[feature.tone].split(" ").slice(0,3).join(" ")}`}>
                 <Icon size={20} />
               </div>
-              <h3 className="font-serif text-[26px] leading-tight mt-5">{feature.title}</h3>
+              <h3 className="font-mono text-[26px] leading-tight mt-5">{feature.title}</h3>
               <p className="font-sans text-[15px] text-muted-foreground mt-3 leading-[1.7]">{feature.description}</p>
             </article>
           );

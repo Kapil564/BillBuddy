@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useState } from "react";
-import { SignInButton, SignUpButton } from "@clerk/nextjs";
+import { SignInButton } from "@clerk/nextjs";
 
 const links = [
   { label: "Features", href: "#features" },
@@ -38,9 +38,9 @@ export default function Navbar() {
           <SignInButton>
             <button className="px-4 py-2 text-[13px] rounded-[10px] border border-border text-muted-foreground hover:text-foreground">Sign in</button>
           </SignInButton>
-          <SignUpButton>
+          <SignInButton>
             <button className="px-5 py-2 text-[13px] rounded-[10px] bg-primary text-white font-semibold hover:bg-primary-dark">Get started free</button>
-          </SignUpButton>
+          </SignInButton>
         </div>
       </div>
     </header>

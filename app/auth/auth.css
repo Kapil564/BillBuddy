@@ -1,0 +1,184 @@
+/* Auth Pages Styling */
+
+/* Clerk component overrides */
+.cl-rootBox {
+  width: 100%;
+}
+
+.cl-card {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Form field styling */
+.cl-formField {
+  margin-bottom: 1rem;
+}
+
+.cl-formField__label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.cl-formField__input,
+.cl-input {
+  transition: all 0.2s ease;
+  background-color: rgba(26, 26, 46, 0.6);
+}
+
+.cl-formField__input:focus,
+.cl-input:focus {
+  background-color: rgba(26, 26, 46, 0.8);
+  border-color: rgba(94, 96, 206, 0.5);
+  box-shadow: 0 0 0 3px rgba(94, 96, 206, 0.1);
+}
+
+/* Button styling */
+.cl-button {
+  transition: all 0.2s ease;
+  font-weight: 500;
+  border-radius: 0.5rem;
+}
+
+.cl-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(94, 96, 206, 0.3);
+}
+
+.cl-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Social buttons */
+.cl-socialButtonsBlockButton {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.cl-socialButtonsBlockButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.cl-socialButtonsBlockButton:hover::before {
+  left: 100%;
+}
+
+.cl-socialButtonsBlockButton:hover {
+  background-color: rgba(94, 96, 206, 0.1);
+  border-color: rgba(94, 96, 206, 0.3);
+}
+
+/* Divider */
+.cl-dividerLine {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+.cl-dividerText {
+  color: rgba(168, 168, 192, 0.8);
+  font-weight: 500;
+}
+
+/* Footer links */
+.cl-footerActionLink {
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cl-footerActionLink:hover {
+  color: rgba(94, 96, 206, 0.9);
+}
+
+/* OTP input styling */
+.cl-otpField__input {
+  background-color: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  letter-spacing: 0.5rem;
+}
+
+.cl-otpField__input:focus {
+  background-color: rgba(26, 26, 46, 0.8);
+  border-color: rgba(94, 96, 206, 0.5);
+  box-shadow: 0 0 0 3px rgba(94, 96, 206, 0.1);
+}
+
+/* Alert messages */
+.cl-alert {
+  border-radius: 0.5rem;
+  border: 1px solid;
+  padding: 1rem;
+}
+
+.cl-alert--error {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.cl-alert--warning {
+  background-color: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.3);
+  color: #fbbf24;
+}
+
+.cl-alert--success {
+  background-color: rgba(122, 229, 130, 0.1);
+  border-color: rgba(122, 229, 130, 0.3);
+  color: #7ae582;
+}
+
+/* Loading state */
+.cl-loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Page transitions */
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cl-card {
+  animation: pageIn 0.3s ease-out;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .cl-card {
+    border-radius: 1rem;
+  }
+
+  .cl-formField__label {
+    font-size: 0.8125rem;
+  }
+
+  .cl-button {
+    font-size: 0.875rem;
+  }
+}

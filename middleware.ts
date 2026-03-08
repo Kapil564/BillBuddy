@@ -1,25 +1,23 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-
-const isProtectedRoute = createRouteMatcher([
-  "/dashboard(.*)",
-  "/expenses(.*)",
-  "/contacts(.*)",
-  "/groups(.*)",
-  "/person(.*)",
-  "/settlements(.*)",
-  "/api/email(.*)", // Protect email relay endpoint
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/sign-in",
+  "/sign-up",
+  "/sso-callback"
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth();
 
-  if (!userId && isProtectedRoute(req)) {
-    const { redirectToSignIn } = await auth();
-    return redirectToSignIn();
+  if (isPublicRoute(req)) {
+    return NextResponse.next();
   }
-  return;
+
+  if (!userId) {
+    return NextResponse.redirect(new URL("/sign-in", req.url));
+  }
 
   return NextResponse.next();
 });

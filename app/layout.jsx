@@ -7,8 +7,8 @@ import "./global.css";
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
-  weight: ["400", "600", "700", "900"],
-  style: ["normal", "italic"],
+  weight: ["700", "900"],
+  style: ["normal"],
 });
 
 const dmMono = DM_Mono({
@@ -20,7 +20,7 @@ const dmMono = DM_Mono({
 const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-dm-sans",
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500"],
 });
 
 export const metadata = {
@@ -32,7 +32,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${playfair.variable} ${dmMono.variable} ${dmSans.variable}`}>
       <body className="bg-background text-foreground antialiased">
-        <ClerkProvider afterSignOutUrl="/">
+        <ClerkProvider 
+          afterSignOutUrl="/"
+          signInUrl="/sign-in"
+          signUpUrl="/sign-up"
+        >
           <ConvexClientProvider>
             <Toaster richColors />
             {children}
