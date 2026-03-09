@@ -12,7 +12,6 @@ export default function SignInPage() {
           Sign in to your Bill Buddy account
         </p>
       </div>
-
       {/* Clerk Sign In Component */}
       <div className="w-full">
         <SignIn
@@ -42,10 +41,10 @@ export default function SignInPage() {
             },
             variables: {
               colorPrimary: "rgb(94, 96, 206)",
-              colorText: "#eeeaf8",
-              colorTextSecondary: "#a8a8c0",
+              colorForeground: "#eeeaf8",
+              colorMutedForeground: "#a8a8c0",
               colorBackground: "#0f0f1a",
-              colorInputBackground: "#1a1a2e",
+              colorInput: "#1a1a2e",
               colorInputBorder: "rgba(255, 255, 255, 0.1)",
               colorNeutral: "#2a2a3e",
               colorSuccess: "#7ae582",
@@ -61,7 +60,6 @@ export default function SignInPage() {
           signUpUrl="/auth/sign-up"
         />
       </div>
-
       {/* Additional help text */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">

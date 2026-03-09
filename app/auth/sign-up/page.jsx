@@ -12,7 +12,6 @@ export default function SignUpPage() {
           Join Bill Buddy to split expenses with friends
         </p>
       </div>
-
       {/* Features highlight */}
       <div className="grid grid-cols-2 gap-3 p-4 bg-card border border-border/30 rounded-xl">
         <div className="text-center space-y-1">
@@ -32,7 +31,6 @@ export default function SignUpPage() {
           <p className="text-xs text-muted-foreground font-medium">Privacy First</p>
         </div>
       </div>
-
       {/* Clerk Sign Up Component */}
       <div className="w-full">
         <SignUp
@@ -63,10 +61,10 @@ export default function SignUpPage() {
             },
             variables: {
               colorPrimary: "rgb(94, 96, 206)",
-              colorText: "#eeeaf8",
-              colorTextSecondary: "#a8a8c0",
+              colorForeground: "#eeeaf8",
+              colorMutedForeground: "#a8a8c0",
               colorBackground: "#0f0f1a",
-              colorInputBackground: "#1a1a2e",
+              colorInput: "#1a1a2e",
               colorInputBorder: "rgba(255, 255, 255, 0.1)",
               colorNeutral: "#2a2a3e",
               colorSuccess: "#7ae582",
@@ -82,7 +80,6 @@ export default function SignUpPage() {
           signInUrl="/auth/sign-in"
         />
       </div>
-
       {/* Additional help text */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
@@ -97,7 +94,6 @@ export default function SignUpPage() {
           </span>
         </div>
       </div>
-
       {/* Terms note */}
       <p className="text-center text-xs text-muted-foreground">
         By creating an account, you agree to our{" "}
