@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 
 import { ArrowRight } from "lucide-react";
 import { SignInButton } from "@clerk/nextjs";
-import LaunchPanel from "@/components/LaunchPanel/page";
-import AppMockup from "@/components/AppMockup/page";
+import LaunchPanel from "@/components/LandingComponent/LaunchPanel";
+import AppMockup from "@/components/LandingComponent/AppMockup";
 
 export default function Hero() {
   return (

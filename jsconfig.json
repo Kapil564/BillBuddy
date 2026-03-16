@@ -30,13 +30,13 @@
     }
   },
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
+    "next-env.d.jsx?",
+    "**/*.jsx?",
+    "**/*.jsx?",
+    ".next/types/**/*.jsx?",
     "app/ConvexClientProvider.jsx",
     "convex/users.js",
-    "convex/auth.config.ts",
+    "convex/auth.config.jsx?",
     "lib/inngest/functions.js",
     "app/api/inngest/route.js",
     "lib/inngest/client.js",
@@ -56,14 +56,14 @@
     "components/ui/badge.jsx",
     "components/ui/button.jsx",
     "components/ui/card.jsx",
-    "components/AboutUs/page.jsx",
+    "components/LandingComponent/AboutUs.jsx",
     "app/dashboard/page.jsx",
     "app/invite-friends/page.jsx",
-    "app/Features/page.jsx",
-    "components/Footer/page.jsx",
-    "components/Hero/page.jsx",
-    "components/Navbar/page.jsx",
-    ".next/dev/types/**/*.ts"
+    "components/LandingComponent/Feature.jsx",
+    "components/LandingComponent/Footer.jsx",
+    "components/LandingComponent/HeroSection.jsx",
+    "components/LandingComponent/Navbar.jsx",
+    ".next/dev/types/**/*.jsx?"
   ],
   "exclude": [
     "node_modules"
