@@ -20,12 +20,14 @@ const BADGE_THRESHOLDS = [0, 0.33, 0.66, 0.99];
 
 export default function HowItWorks() {
   const sectionRef = useRef(null);
+  const [mounted, setMounted] = useState(false);
   const [pct, setPct] = useState(0);
   const [inView, setInView] = useState(false);
   const [litBadges, setLitBadges] = useState([false, false, false, false]);
 
   // ── Scroll-driven line progress ──────────────────────────────────
   useEffect(() => {
+    setMounted(true);
     const onScroll = () => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
@@ -55,6 +57,11 @@ export default function HowItWorks() {
 
   const staggerDelay = ["delay-300", "delay-500", "delay-700", "delay-900"];
 
+  // Guard: before mount, always render the default (hidden) state to match server HTML
+  const isInView = mounted && inView;
+  const isLitBadges = mounted ? litBadges : [false, false, false, false];
+  const activePct = mounted ? pct : 0;
+
   return (
     <section
       id="workflow"
@@ -67,7 +74,7 @@ export default function HowItWorks() {
         <p
           className={`font-mono text-[10px] tracking-[3px] uppercase text-accent text-center
             transition-all duration-700
-            ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
+            ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
           
           How it works
         </p>
@@ -76,7 +83,7 @@ export default function HowItWorks() {
         <h2
           className={`heading-lg text-center mt-4
             transition-all duration-700 delay-150
-            ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+            ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           
           From shared cost to clean settlement
         </h2>
@@ -92,13 +99,13 @@ export default function HowItWorks() {
             {/* Green fill */}
             <div
               className="absolute inset-y-0 left-0 bg-gradient-to-r from-emerald-400 to-emerald-300 rounded-full transition-[width] duration-100"
-              style={{ width: `${pct * 100}%` }} />
+              style={{ width: `${activePct * 100}%` }} />
             
 
             {/* Glowing tip dot */}
             <div
               className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_16px_#34d399] transition-[left] duration-100"
-              style={{ left: `${pct * 100}%` }} />
+              style={{ left: `${activePct * 100}%` }} />
             
           </div>
 
@@ -108,14 +115,14 @@ export default function HowItWorks() {
             key={step.num}
             className={`text-center relative
                 transition-all duration-700 ${staggerDelay[i]}
-                ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+                ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             
               {/* Badge */}
               <div
               className={`mx-auto h-14 w-14 rounded-full bg-background border grid place-items-center
                   font-serif text-xl transition-all duration-300
                   ${toneClass[step.tone]}
-                  ${litBadges[i] ?
+                  ${isLitBadges[i] ?
               "ring-2 ring-emerald-400/30 shadow-[0_0_20px_#34d39955] scale-110" :
               "scale-100"}`
               }>
@@ -123,7 +130,7 @@ export default function HowItWorks() {
                 {/* Number pop */}
                 <span
                 className={`transition-transform duration-300 ${staggerDelay[i]}
-                    ${inView ? "scale-100" : "scale-0"}`}>
+                    ${isInView ? "scale-100" : "scale-0"}`}>
                 
                   {step.num}
                 </span>

@@ -23,7 +23,14 @@ export function Navbar() {
             </Button>
           </Link>
           
-           <UserButton  />
+           <UserButton 
+            afterSignOutUrl="/"
+            appearance={{
+              elements: {
+                avatarBox: "h-8 w-8",
+              },
+            }}
+          />
         </div>
       </div>
     </nav>

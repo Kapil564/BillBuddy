@@ -1,5 +1,3 @@
-﻿"use client";
-
 import { Target, Users, Zap } from "lucide-react";
 
 const values = [
@@ -34,7 +32,7 @@ export default function AboutUs() {
           const Icon = item.icon;
           return (
             <article key={item.title} className="rounded-2xl border border-border bg-card p-6 hover:bg-secondary transition-colors">
-              <div className="h-12 w-12 rounded-xl border border-primary/35 bg-primary/12 text-primary grid place-items-center">
+              <div className="h-12 w-12 rounded-xl border border-primary/35 bg-primary/10 text-primary grid place-items-center">
                 <Icon size={20} />
               </div>
               <h3 className="font-serif text-[24px] mt-4">{item.title}</h3>
@@ -46,3 +44,4 @@ export default function AboutUs() {
     </section>
   );
 }
+

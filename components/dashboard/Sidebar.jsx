@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "../ui/button";
-import { Card } from "../ui/card";
+import { Card } from "../ui/newCard";
 import { Separator } from "../ui/separator";
 import { ScrollArea } from "../ui/scroll-area";
 import {

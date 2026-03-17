@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from "../ui/card";
+} from "../ui/newCard";
 import { EmailInputField } from "./EmailInputField";
 import { Send, UserPlus } from "lucide-react";
 import { useAction } from "convex/react";

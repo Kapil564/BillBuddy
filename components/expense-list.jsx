@@ -3,8 +3,8 @@
 import { useConvexQuery, useConvexMutation } from "@/hooks/use-convex-query";
 import { api } from "@/convex/_generated/api";
 import { format } from "date-fns";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/newCard";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/newavatar";
 import { Badge } from "@/components/ui/badge";
 import { getCategoryById } from "@/lib/expense-categories";
 import { getCategoryIcon } from "@/lib/expense-categories";

@@ -10,6 +10,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useState, useEffect } from "react";
 export function ExpenseSummary({ monthlySpending, totalSpent }) {
      const monthNames = [
     "Jan",
@@ -35,8 +36,15 @@ export function ExpenseSummary({ monthlySpending, totalSpent }) {
       };
     }) || [];
 
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth();
+  const [currentYear, setCurrentYear] = useState(0);
+  const [currentMonth, setCurrentMonth] = useState(0);
+
+  // Compute current date only on the client to avoid SSR/client mismatch
+  useEffect(() => {
+    const now = new Date();
+    setCurrentYear(now.getFullYear());
+    setCurrentMonth(now.getMonth());
+  }, []);
 
   return(
     <Card>

@@ -7,7 +7,7 @@ import * as z from "zod";
 import { api } from "@/convex/_generated/api";
 import { useConvexMutation, useConvexQuery } from "@/hooks/use-convex-query";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/newbutton";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
@@ -44,7 +44,8 @@ const expenseSchema = z.object({
 
 export function ExpenseForm({ type = "individual", onSuccess }) {
   const [participants, setParticipants] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  // Start as null — will be set client-side to avoid SSR/client date mismatch
+  const [selectedDate, setSelectedDate] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [splits, setSplits] = useState([]);
 
@@ -68,12 +69,19 @@ export function ExpenseForm({ type = "individual", onSuccess }) {
       description: "",
       amount: "",
       category: "",
-      date: new Date(),
+      date: null,
       paidByUserId: currentUser?._id || "",
       splitType: "equal",
       groupId: undefined,
     },
   });
+
+  // Set the initial date only on the client to avoid SSR/client mismatch
+  useEffect(() => {
+    const today = new Date();
+    setSelectedDate(today);
+    setValue("date", today);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Watch for changes
   const amountValue = watch("amount");

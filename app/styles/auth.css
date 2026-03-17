@@ -1,0 +1,187 @@
+/* ============================================
+   AUTH PAGE STYLES
+   Premium glassmorphism + animated design
+   ============================================ */
+
+/* ─── Animated Orbs ─── */
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(40px, -50px) scale(1.05); }
+  66%       { transform: translate(-30px, 30px) scale(0.97); }
+}
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-50px, 40px) scale(1.08); }
+  70%       { transform: translate(35px, -25px) scale(0.95); }
+}
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(20px, 45px) scale(1.03); }
+}
+
+.auth-orb-1 { animation: orbFloat1 14s ease-in-out infinite; }
+.auth-orb-2 { animation: orbFloat2 18s ease-in-out infinite 2s; }
+.auth-orb-3 { animation: orbFloat3 22s ease-in-out infinite 5s; }
+
+/* ─── Shimmer text ─── */
+@keyframes shimmerText {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.auth-shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #5e60ce 0%,
+    #758bfd 25%,
+    #7ae582 50%,
+    #758bfd 75%,
+    #5e60ce 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 5s linear infinite;
+}
+
+/* ─── Mesh gradient noise ─── */
+.auth-mesh {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(94, 96, 206, 0.18), transparent),
+    radial-gradient(ellipse 60% 60% at 80% 80%, rgba(117, 139, 253, 0.12), transparent),
+    radial-gradient(ellipse 50% 70% at 10% 90%, rgba(122, 229, 130, 0.08), transparent);
+}
+
+/* ─── Glow border card ─── */
+.auth-glass-card {
+  background: rgba(15, 15, 26, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 32px 64px -12px rgba(0, 0, 0, 0.6),
+    0 0 80px -20px rgba(94, 96, 206, 0.15);
+}
+
+/* ─── Glow border highlight animation ─── */
+@keyframes borderGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(94, 96, 206, 0.1), 0 32px 64px -12px rgba(0, 0, 0, 0.6); }
+  50%       { box-shadow: 0 0 40px rgba(94, 96, 206, 0.2), 0 32px 64px -12px rgba(0, 0, 0, 0.6); }
+}
+.auth-glass-card-glow {
+  animation: borderGlow 4s ease-in-out infinite;
+}
+
+/* ─── Floating mock UI elements ─── */
+@keyframes floatCard1 {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(-12px) rotate(-1deg); }
+}
+@keyframes floatCard2 {
+  0%, 100% { transform: translateY(0px) rotate(1.5deg); }
+  50%       { transform: translateY(-8px) rotate(1.5deg); }
+}
+@keyframes floatCard3 {
+  0%, 100% { transform: translateY(0px) rotate(-0.5deg); }
+  50%       { transform: translateY(-16px) rotate(-0.5deg); }
+}
+.auth-float-1 { animation: floatCard1 6s ease-in-out infinite; }
+.auth-float-2 { animation: floatCard2 8s ease-in-out infinite 1s; }
+.auth-float-3 { animation: floatCard3 7s ease-in-out infinite 2.5s; }
+
+/* ─── Page entry animations ─── */
+@keyframes authSlideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.auth-slide-up-1 { animation: authSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+.auth-slide-up-2 { animation: authSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+.auth-slide-up-3 { animation: authSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; }
+.auth-slide-up-4 { animation: authSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
+.auth-slide-up-5 { animation: authSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both; }
+
+/* ─── Glow dot pulse ─── */
+@keyframes glowDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(122, 229, 130, 0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(122, 229, 130, 0); }
+}
+.auth-glow-dot { animation: glowDot 2s ease-in-out infinite; }
+
+/* ─── Noise texture overlay ─── */
+.auth-noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* ─── Clerk card override ─── */
+.cl-rootBox, .cl-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ─── Social button hover glow ─── */
+.auth-social-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+.auth-social-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.auth-social-btn:hover::before { opacity: 1; }
+
+/* ─── Input focus glow ─── */
+.auth-input:focus {
+  box-shadow: 0 0 0 3px rgba(94, 96, 206, 0.15), 0 0 20px rgba(94, 96, 206, 0.08);
+  border-color: rgba(94, 96, 206, 0.6) !important;
+}
+
+/* ─── CTA button ─── */
+.auth-cta {
+  background: linear-gradient(135deg, #5e60ce 0%, #758bfd 100%);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.auth-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.auth-cta:hover {
+  box-shadow: 0 8px 32px rgba(94, 96, 206, 0.4);
+  transform: translateY(-1px);
+}
+.auth-cta:hover::after { opacity: 1; }
+
+/* ─── Particle dots ─── */
+@keyframes particleDrift {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  15%  { opacity: 0.6; }
+  85%  { opacity: 0.3; }
+  100% { transform: translateY(-120px) translateX(20px); opacity: 0; }
+}
+.auth-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(117, 139, 253, 0.6);
+  animation: particleDrift var(--duration, 8s) ease-in-out infinite var(--delay, 0s);
+}
