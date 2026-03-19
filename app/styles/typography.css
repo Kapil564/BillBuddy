@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    TYPOGRAPHY
    ============================================ */
 @utility heading-hero {
@@ -36,4 +36,16 @@
   font-size: 1rem;
   line-height: 1.65;
   font-weight: 300;
+}
+
+
+
+@utility value-positive {
+  color: var(--color-green);
+  font-family: var(--font-data);
+}
+
+@utility value-negative {
+  color: var(--color-red);
+  font-family: var(--font-data);
 }

@@ -15,26 +15,25 @@ export default function SignInPage() {
       router.replace("/dashboard");
     }
   }, [isLoaded, isSignedIn, router]);
-
-  // Don't render the form if user is already signed in
   if (!isLoaded || isSignedIn) {
     return (
-      <div className="min-h-screen bg-[#0d0e1a] flex items-center justify-center px-4">
-        <div className="text-white/50 text-sm">Loading...</div>
+      <div className="min-h-screen bg-[#eae7df] flex items-center justify-center px-4">
+        <div className="text-[#1c1c1a]/40 text-sm">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0d0e1a] flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-[#13141f] border border-white/8 rounded-2xl p-8 shadow-2xl">
+    <div className="min-h-screen bg-[#eae7df] flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-[#f4f1eb] border border-[#d6d0c4] rounded-2xl p-8 shadow-sm">
         <div className="space-y-6">
+
           {/* Title */}
           <div className="text-center">
-            <h1 className="font-serif text-3xl font-bold text-white mb-2">
+            <h1 className="font-serif text-3xl font-bold text-[#1c1c1a] mb-2">
               Welcome back
             </h1>
-            <p className="text-white/70 text-sm">
+            <p className="text-[#7a7570] text-sm">
               Sign in to your Bill Buddy account
             </p>
           </div>
@@ -44,9 +43,9 @@ export default function SignInPage() {
 
           {/* Divider */}
           <div className="flex items-center gap-4">
-            <div className="flex-1 h-px bg-white/10"></div>
-            <span className="text-white/50 text-sm">or</span>
-            <div className="flex-1 h-px bg-white/10"></div>
+            <div className="flex-1 h-px bg-[#d6d0c4]"></div>
+            <span className="text-[#7a7570] text-sm">or</span>
+            <div className="flex-1 h-px bg-[#d6d0c4]"></div>
           </div>
 
           {/* Sign In Form */}
@@ -54,13 +53,14 @@ export default function SignInPage() {
 
           {/* Sign Up Link */}
           <div className="text-center">
-            <p className="text-white/70 text-sm">
+            <p className="text-[#7a7570] text-sm">
               Don&apos;t have an account?{" "}
-              <a href="/sign-up" className="text-indigo-400 hover:text-indigo-300 font-medium">
+              <a href="/sign-up" className="text-[#2d4a3e] hover:text-[#1e3329] font-medium">
                 Sign up
               </a>
             </p>
           </div>
+
         </div>
       </div>
     </div>

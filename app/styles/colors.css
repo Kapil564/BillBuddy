@@ -1,63 +1,88 @@
-﻿/* ============================================
+/* ============================================
    COLORS & THEME VARIABLES
    ============================================ */
 :root {
-  --background: #08080f;
-  --foreground: #eeeaf8;
+  /* New Tokens */
+  --cream: #F5EFE2;
+  --cream-dark: #EDE6D6;
+  --ink: #16150F;
+  --ink-mid: #2E2C22;
+  --ink-soft: #6B6759;
+  --green: #1A5C3A;
+  --green-light: #E8F3EC;
+  --green-mid: #2D7A52;
+  --amber: #C4852A;
+  --amber-light: #FDF3E3;
+  --red: #C0392B;
+  --white: #FDFAF5;
 
-  --card: #0f0f1a;
-  --card-foreground: #eeeaf8;
-  --popover: #0f0f1a;
-  --popover-foreground: #eeeaf8;
+  --border-light: rgba(22, 21, 15, 0.12);
+  --border-dark: rgba(22, 21, 15, 0.22);
 
-  --primary: #5e60ce;
-  --primary-dark: #6e70e0;
-  --primary-foreground: #ffffff;
+  /* Semantic Mapping (Shadcn/Tailwind Compat) */
+  --background: var(--cream);
+  --foreground: var(--ink);
 
-  --secondary: #151525;
-  --secondary-foreground: #eeeaf8;
+  --card: var(--white);
+  --card-foreground: var(--ink);
+  --popover: var(--white);
+  --popover-foreground: var(--ink);
 
-  --accent: #758bfd;
-  --accent-foreground: #ffffff;
+  --primary: var(--green);
+  --primary-dark: var(--green-mid);
+  --primary-foreground: var(--white);
 
-  --muted: #151525;
-  --muted-foreground: rgba(238, 234, 248, 0.5);
-  --border: rgba(255, 255, 255, 0.07);
-  --input: rgba(255, 255, 255, 0.12);
-  --ring: #5e60ce;
+  --secondary: var(--cream-dark);
+  --secondary-foreground: var(--ink);
 
-  --destructive: #e85c5c;
-  --destructive-foreground: #ffffff;
+  --accent: var(--green-light);
+  --accent-foreground: var(--green);
 
-  --orange: #758bfd;
-  --green: #7ae582;
-  --sidebar-bg: #0f0f1a;
-  --sidebar-hover: #151525;
+  --muted: var(--cream-dark);
+  --muted-foreground: var(--ink-soft);
+
+  --border: var(--border-light);
+  --input: var(--border-light);
+  --ring: var(--green);
+
+  --destructive: var(--red);
+  --destructive-foreground: var(--white);
+
   --radius: 1rem;
 
-  --chart-1: #5e60ce;
-  --chart-2: #758bfd;
-  --chart-3: #7ae582;
-  --chart-4: #70e000;
-  --chart-5: #e85c5c;
+  --sidebar-bg: var(--cream-dark);
+  --sidebar-hover: rgba(22, 21, 15, 0.05);
 
-  --sidebar: #0f0f1a;
-  --sidebar-foreground: #eeeaf8;
-  --sidebar-primary: #5e60ce;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #151525;
-  --sidebar-accent-foreground: #eeeaf8;
-  --sidebar-border: rgba(255, 255, 255, 0.07);
-  --sidebar-ring: #5e60ce;
+  --chart-1: var(--green);
+  --chart-2: var(--amber);
+  --chart-3: var(--red);
+  --chart-4: var(--ink-mid);
+  --chart-5: var(--ink-soft);
 
-  --indigo: #5e60ce;
-  --periwinkle: #758bfd;
-  --sage: #7ae582;
-  --lime: #70e000;
-  --expense: #e85c5c;
+  --sidebar: var(--cream-dark);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--green);
+  --sidebar-primary-foreground: var(--white);
+  --sidebar-accent: rgba(22, 21, 15, 0.05);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--border-light);
+  --sidebar-ring: var(--green);
 }
 
 @theme inline {
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-ink: var(--ink);
+  --color-ink-mid: var(--ink-mid);
+  --color-ink-soft: var(--ink-soft);
+  --color-green: var(--green);
+  --color-green-light: var(--green-light);
+  --color-green-mid: var(--green-mid);
+  --color-amber: var(--amber);
+  --color-amber-light: var(--amber-light);
+  --color-red: var(--red);
+  --color-white: var(--white);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
@@ -66,15 +91,12 @@
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-border: var(--border);
-  --color-orange: var(--orange);
-  --color-green: var(--green);
+  --color-border-dark: var(--border-dark);
   --color-sidebar-bg: var(--sidebar-bg);
   --color-sidebar-hover: var(--sidebar-hover);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-display: "Playfair Display", serif;
-  --font-body: "DM Sans", sans-serif;
-  --font-data: "DM Mono", monospace;
+  --font-display: var(--font-fraunces, "Fraunces", serif);
+  --font-body: var(--font-syne, "Syne", sans-serif);
+  --font-data: var(--font-dm-mono, "DM Mono", monospace);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

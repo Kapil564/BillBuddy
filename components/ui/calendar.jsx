@@ -3,7 +3,6 @@
 import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker } from "react-day-picker"
-
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
@@ -14,60 +13,93 @@ function Calendar({
   ...props
 }) {
   return (
-    (<DayPicker
+    <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn("p-3", className)}
+      className={cn(
+        // Card shell — matches your auth card style
+        "p-5 rounded-2xl bg-[#f4f1eb] border border-[#d6d0c4] shadow-sm w-fit",
+        className
+      )}
       classNames={{
-        months: "flex flex-col sm:flex-row gap-2",
-        month: "flex flex-col gap-4",
-        caption: "flex justify-center pt-1 relative items-center w-full",
-        caption_label: "text-sm font-medium",
+        months: "flex flex-col sm:flex-row gap-6",
+        month: "space-y-4",
+
+        // Header row: "March 2025" + arrows
+        month_caption: "flex justify-center pt-1 relative items-center w-full",
+        caption_label: "text-sm font-semibold text-[#1c1c1a] tracking-wide",
+
+        // Nav arrows
         nav: "flex items-center gap-1",
-        nav_button: cn(
-          buttonVariants({ variant: "outline" }),
-          "size-7 bg-transparent p-0 opacity-50 hover:opacity-100"
-        ),
-        nav_button_previous: "absolute left-1",
-        nav_button_next: "absolute right-1",
-        table: "w-full border-collapse space-x-1",
-        head_row: "flex",
-        head_cell:
-          "text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]",
-        row: "flex w-full mt-2",
-        cell: cn(
-          "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-range-end)]:rounded-r-md",
-          props.mode === "range"
-            ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
-            : "[&:has([aria-selected])]:rounded-md"
-        ),
-        day: cn(
+        button_previous: cn(
           buttonVariants({ variant: "ghost" }),
-          "size-8 p-0 font-normal aria-selected:opacity-100"
+          "h-7 w-7 p-0 absolute left-1",
+          "text-[#7a7570] hover:text-[#1c1c1a] hover:bg-[#eae7df]",
+          "border border-[#d6d0c4] rounded-lg"
         ),
-        day_range_start:
-          "day-range-start aria-selected:bg-primary aria-selected:text-primary-foreground",
-        day_range_end:
-          "day-range-end aria-selected:bg-primary aria-selected:text-primary-foreground",
-        day_selected:
-          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
-        day_today: "bg-accent text-accent-foreground",
-        day_outside:
-          "day-outside text-muted-foreground aria-selected:text-muted-foreground",
-        day_disabled: "text-muted-foreground opacity-50",
-        day_range_middle:
-          "aria-selected:bg-accent aria-selected:text-accent-foreground",
-        day_hidden: "invisible",
+        button_next: cn(
+          buttonVariants({ variant: "ghost" }),
+          "h-7 w-7 p-0 absolute right-1",
+          "text-[#7a7570] hover:text-[#1c1c1a] hover:bg-[#eae7df]",
+          "border border-[#d6d0c4] rounded-lg"
+        ),
+
+        // Grid
+        month_grid: "w-full border-collapse",
+        weekdays: "flex w-full mb-1",
+        weekday:
+          "text-[#b8b2aa] rounded-md w-9 font-medium text-[0.7rem] uppercase tracking-wider text-center",
+        week: "flex w-full mt-1",
+
+        // Individual day cell
+        day: cn(
+          "relative p-0 text-center text-sm",
+          "focus-within:relative focus-within:z-20",
+          "[&:has([aria-selected])]:bg-[#2d4a3e]/10",
+          "[&:has([aria-selected].day-outside)]:bg-[#2d4a3e]/5",
+          props.mode === "range"
+            ? "[&:has(>.day-range-end)]:rounded-r-lg [&:has(>.day-range-start)]:rounded-l-lg first:[&:has([aria-selected])]:rounded-l-lg last:[&:has([aria-selected])]:rounded-r-lg"
+            : "[&:has([aria-selected])]:rounded-lg"
+        ),
+        day_button: cn(
+          buttonVariants({ variant: "ghost" }),
+          "h-9 w-9 p-0 font-normal rounded-lg",
+          "text-[#1c1c1a] hover:bg-[#eae7df] hover:text-[#1c1c1a]",
+          "aria-selected:opacity-100 transition-colors"
+        ),
+
+        // Range selection
+        range_start:
+          "day-range-start aria-selected:bg-[#2d4a3e] aria-selected:text-[#f4f1eb] rounded-l-lg",
+        range_end:
+          "day-range-end aria-selected:bg-[#2d4a3e] aria-selected:text-[#f4f1eb] rounded-r-lg",
+        range_middle:
+          "aria-selected:bg-[#2d4a3e]/10 aria-selected:text-[#1c1c1a]",
+
+        // Selected single day
+        selected:
+          "bg-[#2d4a3e] text-[#f4f1eb] hover:bg-[#1e3329] hover:text-[#f4f1eb] focus:bg-[#2d4a3e] focus:text-[#f4f1eb] rounded-lg",
+
+        // Today
+        today:
+          "bg-[#eae7df] text-[#2d4a3e] font-semibold ring-1 ring-[#2d4a3e]/30 rounded-lg",
+
+        // Outside month days
+        outside:
+          "day-outside text-[#c2bdb5] opacity-40 aria-selected:bg-[#2d4a3e]/5 aria-selected:text-[#7a7570]",
+
+        disabled: "text-[#c2bdb5] opacity-40 cursor-not-allowed",
+        hidden: "invisible",
+
         ...classNames,
       }}
       components={{
-        IconLeft: ({ className, ...props }) => (
-          <ChevronLeft className={cn("size-4", className)} {...props} />
-        ),
-        IconRight: ({ className, ...props }) => (
-          <ChevronRight className={cn("size-4", className)} {...props} />
-        ),
+        Chevron: ({ orientation, className: cls, ...rest }) => {
+          const Comp = orientation === "left" ? ChevronLeft : ChevronRight;
+          return <Comp className={cn("size-4", cls)} {...rest} />;
+        },
       }}
-      {...props} />)
+      {...props}
+    />
   );
 }
 

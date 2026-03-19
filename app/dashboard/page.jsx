@@ -10,14 +10,12 @@ export default function DashboardPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // if user has signed out, redirect to home
     if (isLoaded && !isSignedIn) {
       router.push("/");
     }
   }, [isLoaded, isSignedIn, router]);
 
-  // Avoid rendering Convex queries until user is confirmed signed in
-  if (!isLoaded) return null; // Optional: show a loading spinner here
+  if (!isLoaded) return null; 
   if (!isSignedIn) return null;
   return (<DashboardLayout />)
 }

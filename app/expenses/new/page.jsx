@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import { ExpenseForm } from "./components/expense-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/newCard";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
 
 export default function NewExpensePage() {
   const router = useRouter();
@@ -11,6 +14,12 @@ export default function NewExpensePage() {
   return (
     <div className="container max-w-3xl mx-auto py-6">
       <div className="mb-6">
+        <Link href="/dashboard">
+          <Button variant="ghost" className="mb-4 pl-0 text-muted-foreground hover:text-foreground">
+            <ChevronLeft className="mr-2 h-4 w-4" />
+            Back to Dashboard
+          </Button>
+        </Link>
         <h1 className="text-5xl gradient-title">Add a new expense</h1>
         <p className="text-muted-foreground mt-1">
           Record a new expense to split with others

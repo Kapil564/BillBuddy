@@ -41,15 +41,15 @@ export default function SignInForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 cursor-pointer">
       {error && (
-        <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+        <div className="rounded-xl border border-red-400/40 bg-red-50 px-4 py-3 text-sm text-red-600">
           {error}
         </div>
       )}
 
       <div className="space-y-1.5">
-        <label htmlFor="signin-email" className="block text-xs font-medium text-white/60 uppercase tracking-wide">
+        <label htmlFor="signin-email" className="block text-xs font-medium text-[#2e2c2a] uppercase tracking-wide">
           Email
         </label>
         <input
@@ -60,12 +60,12 @@ export default function SignInForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-all focus:border-indigo-500/70 focus:bg-white/8 focus:ring-1 focus:ring-indigo-500/30"
+          className="w-full rounded-xl border border-[#d6d0c4] bg-[#eae7df] px-4 py-3 text-sm text-[#1c1c1a] placeholder-[#b8b2aa] outline-none transition-all focus:border-[#2d4a3e] focus:ring-1 focus:ring-[#2d4a3e]/20"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="signin-password" className="block text-xs font-medium text-white/60 uppercase tracking-wide">
+        <label htmlFor="signin-password" className="block text-xs font-medium text-[#2e2c2a] uppercase tracking-wide">
           Password
         </label>
         <input
@@ -76,7 +76,7 @@ export default function SignInForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="••••••••"
-          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-all focus:border-indigo-500/70 focus:bg-white/8 focus:ring-1 focus:ring-indigo-500/30"
+          className="w-full rounded-xl border border-[#d6d0c4] bg-[#eae7df] px-4 py-3 text-sm text-[#1c1c1a] placeholder-[#b8b2aa] outline-none transition-all focus:border-[#2d4a3e] focus:ring-1 focus:ring-[#2d4a3e]/20"
         />
       </div>
 
@@ -84,7 +84,7 @@ export default function SignInForm() {
         id="signin-submit"
         type="submit"
         disabled={loading || !isLoaded}
-        className="w-full rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-500 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full cursor-pointer rounded-xl bg-[#2d4a3e] px-4 py-3 text-sm font-semibold text-[#f4f1eb] transition-all hover:bg-[#1e3329] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? "Signing in…" : "Sign in"}
       </button>

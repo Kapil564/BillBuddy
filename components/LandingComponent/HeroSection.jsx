@@ -2,8 +2,8 @@
 
 import { ArrowRight } from "lucide-react";
 import { SignInButton } from "@clerk/nextjs";
-import LaunchPanel from "@/components/LandingComponent/LaunchPanel";
 import AppMockup from "@/components/LandingComponent/AppMockup";
+import StatsBar from "@/components/ui/StatsBar";
 
 export default function Hero() {
   return (
@@ -11,13 +11,16 @@ export default function Hero() {
       <div className="absolute pointer-events-none blur-[90px] opacity-30 top-[15%] -left-[120px] w-[480px] h-[360px] bg-[radial-gradient(circle,var(--indigo),transparent)] animate-float-orb" />
       <div className="absolute pointer-events-none blur-[90px] opacity-30 bottom-[10%] -right-[80px] w-[380px] h-[380px] bg-[radial-gradient(circle,var(--periwinkle),transparent)] animate-float-orb" style={{ animationDuration: "13s", animationDelay: "-5s" }} />
 
-      <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 bg-card border border-border font-mono text-[10px] tracking-[3px] uppercase text-muted-foreground animate-fade-up-1">
-        <span className="h-[6px] w-[6px] rounded-full bg-[var(--lime)] animate-live-pulse" />
+      <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 bg-emerald-50 border border-emerald-200 font-sans text-[10px] tracking-[3px] uppercase text-emerald-700 font-bold shadow-sm animate-fade-up-1">
+        <span className="relative flex h-[6px] w-[6px]">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-[6px] w-[6px] bg-emerald-500"></span>
+        </span>
         Now in public beta
       </div>
 
       <h1 className="heading-hero max-w-[900px] mt-6 animate-fade-up-2">
-        Split expenses,<br />not <em className="italic text-[var(--lime)]">friendships.</em>
+        Split expenses,<br />not <em className="relative italic text-[var(--green)]">friendships.</em>
       </h1>
 
       <p className="body-lg text-muted-foreground max-w-[540px] mt-6 animate-fade-up-3">
@@ -35,9 +38,9 @@ export default function Hero() {
         </button>
       </div>
 
-      <LaunchPanel />
+      <StatsBar />
 
-      <div className="mt-10 w-full">
+      <div className="mt-14 w-full">
         <AppMockup />
       </div>
     </section>

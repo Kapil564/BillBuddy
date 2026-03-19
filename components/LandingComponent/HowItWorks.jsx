@@ -10,9 +10,9 @@ const steps = [
 
 
 const toneClass = {
-  primary: "border-primary/35 text-primary shadow-[0_0_0_6px_#0f0f1a,0_0_0_7px_rgba(94,96,206,0.12)]",
-  accent: "border-accent/35  text-accent  shadow-[0_0_0_6px_#0f0f1a,0_0_0_7px_rgba(117,139,253,0.12)]",
-  green: "border-green/35   text-green   shadow-[0_0_0_6px_#0f0f1a,0_0_0_7px_rgba(122,229,130,0.12)]"
+  primary: "border-primary/35 text-foreground shadow-[0_0_0_6px_var(--background),0_0_0_7px_rgba(94,96,206,0.12)]",
+  accent: "border-accent/35  text-foreground shadow-[0_0_0_6px_var(--background),0_0_0_7px_rgba(117,139,253,0.12)]",
+  green: "border-green/35   text-foreground shadow-[0_0_0_6px_var(--background),0_0_0_7px_rgba(122,229,130,0.12)]"
 };
 
 // pct thresholds at which each badge lights up
@@ -33,7 +33,7 @@ export default function HowItWorks() {
       const rect = sectionRef.current.getBoundingClientRect();
       const top = window.scrollY + rect.top;
       const start = top - window.innerHeight * 0.8;
-      const end = top + sectionRef.current.offsetHeight * 0.55;
+      const end = top - window.innerHeight * 0.2;
       const next = Math.min(1, Math.max(0, (window.scrollY - start) / (end - start)));
       setPct(next);
       setLitBadges(BADGE_THRESHOLDS.map((t) => next >= t));

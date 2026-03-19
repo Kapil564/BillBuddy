@@ -70,7 +70,8 @@ export function InviteFriendsForm() {
     `,
           }),
         });
-        console.log(`Email to ${e.value}:`, response);
+        const data = await response.json();
+        console.log(`Email to ${e.value} response:`, data);
       }
 
       alert(`Invitations sent to ${validEmails.length} email(s)!`);

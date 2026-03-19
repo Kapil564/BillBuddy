@@ -8,7 +8,7 @@ export default function SignUpForm() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const router = useRouter();
 
-  const [step, setStep] = useState("register"); // "register" | "verify"
+  const [step, setStep] = useState("register");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,21 +17,19 @@ export default function SignUpForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const inputClass =
+    "w-full rounded-xl border border-[#d6d0c4] bg-[#eae7df] px-4 py-3 text-sm text-[#1c1c1a] placeholder-[#b8b2aa] outline-none transition-all focus:border-[#2d4a3e] focus:ring-1 focus:ring-[#2d4a3e]/20";
+
+  const labelClass =
+    "block text-xs font-medium text-[#7a7570] uppercase tracking-wide";
+
   const handleRegister = async (e) => {
     e.preventDefault();
     if (!isLoaded) return;
-
     setLoading(true);
     setError("");
-
     try {
-      await signUp.create({
-        firstName,
-        lastName,
-        emailAddress: email,
-        password,
-      });
-
+      await signUp.create({ firstName, lastName, emailAddress: email, password });
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
       setStep("verify");
     } catch (err) {
@@ -45,13 +43,10 @@ export default function SignUpForm() {
   const handleVerify = async (e) => {
     e.preventDefault();
     if (!isLoaded) return;
-
     setLoading(true);
     setError("");
-
     try {
       const result = await signUp.attemptEmailAddressVerification({ code });
-
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
         router.push("/dashboard");
@@ -69,18 +64,21 @@ export default function SignUpForm() {
   if (step === "verify") {
     return (
       <form onSubmit={handleVerify} className="space-y-4">
-        <div className="rounded-xl border border-indigo-500/30 bg-indigo-500/10 px-4 py-3 text-sm text-indigo-300">
-          We sent a verification code to <span className="font-semibold text-white">{email}</span>. Please check your inbox.
+
+        {/* Info banner */}
+        <div className="rounded-xl border border-[#2d4a3e]/25 bg-[#2d4a3e]/8 px-4 py-3 text-sm text-[#2d4a3e]">
+          We sent a verification code to{" "}
+          <span className="font-semibold text-[#1c1c1a]">{email}</span>. Please check your inbox.
         </div>
 
         {error && (
-          <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+          <div className="rounded-xl border border-red-400/40 bg-red-50 px-4 py-3 text-sm text-red-600">
             {error}
           </div>
         )}
 
         <div className="space-y-1.5">
-          <label htmlFor="verify-code" className="block text-xs font-medium text-white/60 uppercase tracking-wide">
+          <label htmlFor="verify-code" className={labelClass}>
             Verification Code
           </label>
           <input
@@ -92,7 +90,7 @@ export default function SignUpForm() {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             placeholder="Enter 6-digit code"
-            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none tracking-widest text-center transition-all focus:border-indigo-500/70 focus:bg-white/8 focus:ring-1 focus:ring-indigo-500/30"
+            className={`${inputClass} tracking-widest text-center`}
           />
         </div>
 
@@ -100,7 +98,7 @@ export default function SignUpForm() {
           id="verify-submit"
           type="submit"
           disabled={loading || !isLoaded}
-          className="w-full rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-500 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full rounded-xl bg-[#2d4a3e] px-4 py-3 text-sm font-semibold text-[#f4f1eb] transition-all hover:bg-[#1e3329] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? "Verifying…" : "Verify Email"}
         </button>
@@ -108,7 +106,7 @@ export default function SignUpForm() {
         <button
           type="button"
           onClick={() => { setStep("register"); setError(""); setCode(""); }}
-          className="w-full text-center text-sm text-white/50 hover:text-white/80 transition-colors"
+          className="w-full text-center text-sm text-[#7a7570] hover:text-[#1c1c1a] transition-colors"
         >
           ← Back to sign up
         </button>
@@ -118,17 +116,17 @@ export default function SignUpForm() {
 
   return (
     <form onSubmit={handleRegister} className="space-y-4">
+
       {error && (
-        <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+        <div className="rounded-xl border border-red-400/40 bg-red-50 px-4 py-3 text-sm text-red-600">
           {error}
         </div>
       )}
 
+      {/* First / Last name */}
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1.5">
-          <label htmlFor="signup-firstname" className="block text-xs font-medium text-white/60 uppercase tracking-wide">
-            First Name
-          </label>
+          <label htmlFor="signup-firstname" className={labelClass}>First Name</label>
           <input
             id="signup-firstname"
             type="text"
@@ -137,13 +135,11 @@ export default function SignUpForm() {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="Riya"
-            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-all focus:border-indigo-500/70 focus:bg-white/8 focus:ring-1 focus:ring-indigo-500/30"
+            className={inputClass}
           />
         </div>
         <div className="space-y-1.5">
-          <label htmlFor="signup-lastname" className="block text-xs font-medium text-white/60 uppercase tracking-wide">
-            Last Name
-          </label>
+          <label htmlFor="signup-lastname" className={labelClass}>Last Name</label>
           <input
             id="signup-lastname"
             type="text"
@@ -152,15 +148,14 @@ export default function SignUpForm() {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             placeholder="Sharma"
-            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-all focus:border-indigo-500/70 focus:bg-white/8 focus:ring-1 focus:ring-indigo-500/30"
+            className={inputClass}
           />
         </div>
       </div>
 
+      {/* Email */}
       <div className="space-y-1.5">
-        <label htmlFor="signup-email" className="block text-xs font-medium text-white/60 uppercase tracking-wide">
-          Email
-        </label>
+        <label htmlFor="signup-email" className={labelClass}>Email</label>
         <input
           id="signup-email"
           type="email"
@@ -169,14 +164,13 @@ export default function SignUpForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-all focus:border-indigo-500/70 focus:bg-white/8 focus:ring-1 focus:ring-indigo-500/30"
+          className={inputClass}
         />
       </div>
 
+      {/* Password */}
       <div className="space-y-1.5">
-        <label htmlFor="signup-password" className="block text-xs font-medium text-white/60 uppercase tracking-wide">
-          Password
-        </label>
+        <label htmlFor="signup-password" className={labelClass}>Password</label>
         <input
           id="signup-password"
           type="password"
@@ -186,7 +180,7 @@ export default function SignUpForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Min. 8 characters"
-          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-all focus:border-indigo-500/70 focus:bg-white/8 focus:ring-1 focus:ring-indigo-500/30"
+          className={inputClass}
         />
       </div>
 
@@ -194,7 +188,7 @@ export default function SignUpForm() {
         id="signup-submit"
         type="submit"
         disabled={loading || !isLoaded}
-        className="w-full rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-500 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full rounded-xl bg-[#2d4a3e] px-4 py-3 text-sm font-semibold text-[#f4f1eb] transition-all hover:bg-[#1e3329] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? "Creating account…" : "Create account"}
       </button>

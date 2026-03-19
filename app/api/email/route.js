@@ -1,40 +1,24 @@
+import { Resend } from 'resend';
+import { NextResponse } from 'next/server';
 
-
-import { NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
-import nodemailer from "nodemailer";
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request) {
-    // Require authentication
-    const { userId } = await auth();
-    if (!userId) {
-        return new NextResponse(JSON.stringify({ message: "Unauthorized" }), { status: 401 });
-    }
+  try {
+    const payload = await request.json();
+    const toEmail = payload.to || payload.email;
+    const emailSubject = payload.subject || "Invitation to Join BillBuddy!";
+    const emailHtml = payload.html || `<p>Hey! You owe <strong>$${payload.amount}</strong> for dinner last night.</p>`;
 
-    try {
-        const body = await request.json();
-        if (!body.to || !body.html) {
-            return new NextResponse(JSON.stringify({ message: "Missing required fields" }), { status: 400 });
-        }
-        const message = {
-            from: process.env.EMAIL,
-            to: body.to,
-            subject: "Invitation from the BillBuddy",
-            html: body.html,
-            headers: {
-                "X-Entity-Ref-ID": "newmail",
-            },
-        };
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASSWORD,
-            },
-        });
-        await transporter.sendMail(message);
-        return new NextResponse(JSON.stringify({ message: "Email sent successfully" }), { status: 200 });
-    } catch (err) {
-        return new NextResponse(JSON.stringify({ message: "Error sending email", error: err?.message }), { status: 500 });
-    }
+    const data = await resend.emails.send({
+      from: 'BillBuddy <onboarding@resend.dev>',
+      to: [toEmail],
+      subject: emailSubject,
+      html: emailHtml,
+    });
+
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json({ error });
+  }
 }

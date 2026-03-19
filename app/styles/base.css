@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    BASE STYLES
    ============================================ */
 @import "tailwindcss";
@@ -12,27 +12,25 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: #08080f;
-  color: #eeeaf8;
+  background: var(--cream);
+  color: var(--ink);
   min-height: 100vh;
   overflow-x: hidden;
   cursor: default;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 0.45px, transparent 0.45px);
-  background-size: 3px 3px;
-  pointer-events: none;
-  z-index: 9998;
-  opacity: 0.6;
-}
+
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  em {
+    text-decoration: none;
+    font-style: italic;
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   :focus-visible {
@@ -46,4 +44,10 @@ body::before {
     position: relative;
     z-index: 2;
   }
+}
+
+@utility dark-section {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  --color-border: rgba(255, 255, 255, 0.15);
 }

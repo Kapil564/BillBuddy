@@ -1,6 +1,4 @@
-/* ============================================
-   GLOBAL STYLES - MODULAR ARCHITECTURE
-   ============================================ */
+
 @import "./styles/base.css";
 @import "./styles/colors.css";
 @import "./styles/typography.css";
@@ -8,3 +6,23 @@
 @import "./styles/patterns.css";
 @import "./styles/effects.css";
 @import "./styles/auth.css";
+
+.text-shine-light {
+  background: linear-gradient(
+    90deg,
+    #1a5d38 0%,
+    #34d399 40%,
+    #10b981 50%,
+    #34d399 60%,
+    #1a5d38 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: textShine 3s linear infinite;
+}
+
+@keyframes textShine {
+  to { background-position: 200% center; }
+}
