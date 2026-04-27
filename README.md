@@ -120,6 +120,28 @@ Important: Do not try to access private keys from client-side code. The browser 
 - For production deployments on Vercel (or similar), add the environment variables in the Vercel project settings.
 - For Convex Cloud, add the same secrets via the Convex dashboard or CLI so that Convex cloud functions can access them.
 
+## Docker Deployment
+
+This application includes a multi-stage `Dockerfile` to create an optimized production image using Next.js standalone mode.
+
+### 1. Build the Image
+```bash
+docker build -t billbuddy-app .
+```
+
+### 2. Run the Container locally
+You will need to pass your environment variables (like API keys) to the container.
+```bash
+docker run -d -p 3000:3000 --env-file .env.local billbuddy-app
+```
+
+### 3. Push to Docker Hub
+To deploy your image to a live server, tag it with your Docker Hub username and push it:
+```bash
+docker tag billbuddy-app <your-username>/billbuddy-app:latest
+docker push <your-username>/billbuddy-app:latest
+```
+
 ## Troubleshooting
 
 - `RESEND_API_KEY` undefined: ensure Convex runtime sees the key and restart the Convex process.
