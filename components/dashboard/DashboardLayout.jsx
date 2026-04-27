@@ -1,6 +1,7 @@
 "use client";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
+import { MobileNav } from "./MobileNav";
 import { BarLoader } from "react-spinners";
 import { api } from "../../convex/_generated/api";
 import { useConvexQuery } from "@/hooks/use-convex-query";
@@ -54,9 +55,10 @@ export function DashboardLayout({ children }) {
     <div className="min-h-screen bg-background">
       <Navbar />
       <Sidebar />
+      <MobileNav />
 
       {/* Main Content Area */}
-      <main className="ml-64 pt-16">
+      <main className="md:ml-64 pt-16 pb-20 md:pb-0">
         {children || (
           <div className="p-6">
             {/* Dashboard content will go here */}
@@ -90,8 +92,8 @@ export function DashboardLayout({ children }) {
               </div>
             ) : (
               <>
-                <div className="flex  justify-between flex-col sm:flex-row sm:items-center gap-4">
-                  <h2 className="gradient text-5xl bold"> Dashboard</h2>
+                <div className="flex justify-between flex-col sm:flex-row sm:items-center gap-4">
+                  <h2 className="gradient text-3xl sm:text-4xl md:text-5xl font-bold break-words">Dashboard</h2>
                   <Button asChild>
                     <Link href="/expenses/new">
                       <PlusCircle className="mr-2 h-4 w-4" />

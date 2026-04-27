@@ -27,7 +27,7 @@ export function Sidebar() {
   const router = useRouter();
 
   return (
-    <aside className="fixed left-0 top-16 bottom-0 w-64 bg-sidebar-bg border-r border-border">
+    <aside className="hidden md:block fixed left-0 top-16 bottom-0 w-64 bg-sidebar-bg border-r border-border z-40">
       <ScrollArea className="h-full">
         <div className="flex flex-col h-full p-4">
           {/* Menu Items */}
